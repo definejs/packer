@@ -1,6 +1,6 @@
 # @definejs/packer
 
-这是一个打包工具，不属于 `@definejs` 中的某个模块。
+这是一个工具包，不属于 `@definejs` 中的某个模块。
 
 把 npm 上的 `@definejs/` 域内的其它模块打包成适用于浏览器端的模块或单一的库。
 
@@ -11,41 +11,46 @@ npm install @definejs/packer
 ```
 
 ## 运行打包
+
 ### 配置文件
-根目录下有三个配置文件，它们是互相独立的。
- - `config.default.js` 默认的配置。
- - `config.mobile.js` 针对移动端的配置，打包出来的库文件适用于移动端开发。 可以根据需要自行修改。
- - `config.pc.js` 针对 PC 端的配置，打包出来的库文件适用于PC 端开发。 可以根据需要自行修改。
+`config` 目录下有三个配置文件，它们是互相独立的。
+ - `default.js` 默认的配置。 打包一个空的库文件。
+ - `mobile.js` 针对移动端的配置，打包出来的库文件适用于移动端开发。 可以根据需要自行修改。
+ - `pc.js` 针对 PC 端的配置，打包出来的库文件适用于PC 端开发。 可以根据需要自行修改。
 
 ### 使用默认配置
-``` bash
-npm start
-
-或 
-
-npm run default
+会加载 `config/default.js` 文件中的配置，打包出一个空的库文件。
+``` javascript
+const packer = require('@definejs/packer');
+packer.pack();
+//或者
+packer.pack('default');
 ```
 
 ### 使用移动端的配置
-会加载 `config.mobile.js` 文件中的配置，打包后的库文件可用于移动端开发。
-``` bash
-npm run mobile
+会加载 `config/mobile.js` 文件中的配置，打包后的库文件可用于移动端开发。
+
+``` javascript
+const packer = require('@definejs/packer');
+packer.pack('moible');
 ```
 
 ### 使用 PC 端的配置
-会加载 `config.pc.js` 文件中的配置，打包后的库文件可用于 PC 端开发。
-``` bash
-npm run pc
+会加载 `config/pc.js` 文件中的配置，打包后的库文件可用于 PC 端开发。
+
+``` javascript
+const packer = require('@definejs/packer');
+packer.pack('pc');
 ```
 
 ### 使用自定义配置
 
-如果要使用自定义配置进行更多的控制，可以创建一个脚本文件，如 `test.js`。
+如果要使用自定义配置进行更多的控制，可以直接在 `pack()` 方法中传入配置对象：
 
 ``` javascript
-const pack = require('@definejs/packer');
+const packer = require('@definejs/packer');
 
-pack({
+packer.pack({
     //必选，是否需要通过 `npm install` 进行安装包。
     //在某些情况下，为了加快打包速度，可以避免重复下载和安装包。
     //指定为 true，则会删除之前的包（如果存在），并且重新下载和安装包。
@@ -147,72 +152,5 @@ define('API/Ajax', function (require, module, exports) {
 ```
 上面的 `API` 模块与 `Ajax` 模块是上下级关系，只有直接上级能调用直接下级，即只有 `API` 模块能加载 `Ajax` 模块：在 `API` 模块里通过 `module.require('Ajax')` 的方式。
 
-## 配置项 config.default.js
-
-``` js
-
-
-//默认的配置。
-module.exports = {
-    //必选，是否需要通过 `npm install` 进行安装包。
-    //在某些情况下，为了加快打包速度，可以避免重复下载和安装包。
-    //指定为 true，则会删除之前的包（如果存在），并且重新下载和安装包。
-    //指定为 false，可以复用之前已安装下好的包，请确保 tempDir 目录中的包已存在。
-    install: true,
-
-    //必选，需要打包的种子 package 名称列表，会自动搜索所有依赖的包。
-    //包的域名 `@definejs/` 可加可不加，如果不加，则工具会自动补全。
-    //这些种子包会给添加到 tempDir 目录中的 package.json 文件中的 dependencies 字段中。
-    packages: [
-
-    ],
-
-    // //以下方式可以指定版本号，必须使用全名称，即包括域名 `@definejs/`。
-    // packages: {
-    //     '@definejs/api': '^0.1.0',
-    // },
-
-    // //当指定为 true 时，则使用 tempDir 目录中 package.json 文件中的 dependencies 字段。
-    // //请确保 tempDir 目录中 package.json 文件存在。
-    // packages: true,
-
-    // //当指定为某个具体的 package.json 文件时，则使用里面的 dependencies 字段。
-    // //请确保指定的 package.json 文件存在。
-    // packages: './temp/default/package.json',
-
-
-
-    //必选，需要导出的全局对象。
-    globalExports: {
-        name: 'KISP', 
-
-        //可选，需要绑定到全局对象的快捷方法。
-        bind: {
-
-        },
-    },
-
-
-    //以下配置项不建议修改。
-    //必选，下载和安装包所要存放的目录。
-    tempDir: './temp/default/',
-
-    //必选，构建输出的目录。
-    outputDir: './output/default/',
-
-    //可选，打包完成后需要复制到的目录，以便用于测试和体验。
-    copyDir: './test/htdocs/f/',
-
-
-    //以下配置项是必须的，不能修改。
-
-    //域名。
-    scope: '@definejs/',
-
-    //模块管理器对应的包名。
-    moduleManager: 'module-manager',
-
-};
-```
 
 

@@ -1,16 +1,9 @@
 {
   "name": "@definejs/packer",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "description": "pack definejs modules as a single file for browser.",
-  "main": "pack.js",
+  "main": "index.js",
   "bin": {
-    "definejs": "./bin/definejs.js"
-  },
-  "scripts": {
-    "start": "node test default",
-    "default": "node test default",
-    "mobile": "node test mobile",
-    "pc": "node test pc"
   },
   "author": "definejs",
   "license": "MIT",

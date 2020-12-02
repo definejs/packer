@@ -78,7 +78,7 @@ module.exports = {
     outputDir: './output/pc/',
 
     //可选，打包完成后需要复制到的目录，以便用于测试和体验。
-    copyDir: './test/htdocs/f/',
+    // copyDir: './test/htdocs/f/',
 
 
 };
