@@ -12,41 +12,6 @@ npm install @definejs/packer
 
 ## 运行打包
 
-### 配置文件
-`config` 目录下有三个配置文件，它们是互相独立的。
- - `default.js` 默认的配置。 打包一个空的库文件。
- - `mobile.js` 针对移动端的配置，打包出来的库文件适用于移动端开发。 可以根据需要自行修改。
- - `pc.js` 针对 PC 端的配置，打包出来的库文件适用于PC 端开发。 可以根据需要自行修改。
-
-### 使用默认配置
-会加载 `config/default.js` 文件中的配置，打包出一个空的库文件。
-``` javascript
-const packer = require('@definejs/packer');
-packer.pack();
-//或者
-packer.pack('default');
-```
-
-### 使用移动端的配置
-会加载 `config/mobile.js` 文件中的配置，打包后的库文件可用于移动端开发。
-
-``` javascript
-const packer = require('@definejs/packer');
-packer.pack('moible');
-```
-
-### 使用 PC 端的配置
-会加载 `config/pc.js` 文件中的配置，打包后的库文件可用于 PC 端开发。
-
-``` javascript
-const packer = require('@definejs/packer');
-packer.pack('pc');
-```
-
-### 使用自定义配置
-
-如果要使用自定义配置进行更多的控制，可以直接在 `pack()` 方法中传入配置对象：
-
 ``` javascript
 const packer = require('@definejs/packer');
 
@@ -61,7 +26,7 @@ packer.pack({
     //包的域名 `@definejs/` 可加可不加，如果不加，则工具会自动补全。
     //这些种子包会给添加到 tempDir 目录中的 package.json 文件中的 dependencies 字段中。
     packages: [
-
+        // 'api',
     ],
 
     // //以下方式可以指定版本号，必须使用全名称，即包括域名 `@definejs/`。
@@ -101,13 +66,13 @@ packer.pack({
 
     //以下配置项不建议修改。
     //必选，下载和安装包所要存放的目录。
-    tempDir: './temp/default/',
+    tempDir: './temp/',
 
     //必选，构建输出的目录。
-    outputDir: './output/default/',
+    outputDir: './output/',
 
     //可选，打包完成后需要复制到的目录，以便用于测试和体验。
-    copyDir: './test/htdocs/f/',
+    // copyDir: './test/htdocs/f/',
 
 
 });
