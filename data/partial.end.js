@@ -7,7 +7,7 @@ BaseMM.each(function (id) {
 });
 
 //导出的全局对象。
-//以下代码由 definejs-packer 工具处理生成。
+//以下代码由 `@definejs/packer` 工具处理生成。
 global['{__global_exports_name__}'] = (function ({ require, bind, }) {
     let exports = { require, };
 
