@@ -1,8 +1,2 @@
 
-/bak
 /node_modules
-/output
-/temp
-/test
-.npmignore
-package-lock.json
