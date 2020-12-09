@@ -5,6 +5,7 @@ const $Object = require('@definejs/object');
 const File = require('@definejs/file');
 
 const GlobalExports = require('./Manager/GlobalExports');
+const HeadComments = require('./Manager/HeadComments');
 const Package = require('./Manager/Package');
 const Sample = require('./Manager/Sample');
 
@@ -162,6 +163,7 @@ module.exports = exports = {
 
         let content = [...begins, ...bodys, ...ends,].join('\r\n');
 
+        content = HeadComments.render(content, name$id);
         content = GlobalExports.render(content, globalExports);
 
         

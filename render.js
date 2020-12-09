@@ -1,12 +1,12 @@
 
 const path = require('path');
 const Directory = require('@definejs/directory');
-const File = require('@definejs/file');
 
 const Less = require('./modules/Less');
 const Manager = require('./modules/Manager');
 const Third = require('./modules/Third');
 const UglifyJS = require('./modules/UglifyJS');
+const MetaInfo = require('./modules/MetaInfo');
 
 
 //打包指定的 package，生成最终的文件和一堆元数据。
@@ -48,7 +48,7 @@ function render(config, dependencies) {
         'node_modules': node_modules,
     });
 
-    
+
 
     let thirdFiles = Third.wrapDefine({
         sample: `${dataDir}third.define.sample.js`,
@@ -97,13 +97,16 @@ function render(config, dependencies) {
     });
 
 
-    //生成元数据，用于以后查阅和参考。
-    ['id$info', 'name$id', 'name$requires',].forEach((key) => {
-        let file = `${metaDir}${key}.json`;
-        let json = Manager[key];
-
-        File.writeJSON(file, json);
+    //生成元数据，以便查阅和参考。
+    MetaInfo.render({
+        'id$info': Manager.id$info,
+        'name$id': Manager.name$id,
+        'name$requires': Manager.name$requires,
+        'thirds': thirds,
+        'dir': metaDir,
     });
+
+
 
 
     if (copyDir) {
