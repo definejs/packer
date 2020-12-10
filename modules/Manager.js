@@ -164,7 +164,7 @@ module.exports = exports = {
         let content = [...begins, ...bodys, ...ends,].join('\r\n');
 
         content = HeadComments.render(content, name$id);
-        content = GlobalExports.render(content, globalExports);
+        content = GlobalExports.render(content, globalExports, name$id);
 
         
         if (dest) {

@@ -15,6 +15,12 @@ global['{__global_exports_name__}'] = (function ({ require, bind, }) {
     exports['{name}'] = bind('{module}', '{method}');
     //<!--global.exports.bind.end-->
 
+    exports['modules'] = [
+        //<!--global.exports.modules.begin-->
+        //这里会插入生成的代码。
+        //<!--global.exports.modules.end-->
+    ];
+
     return exports;
 })(InnerMM);
 
