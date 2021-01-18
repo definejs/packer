@@ -17,6 +17,10 @@ function getBindCode(content, name$item) {
     let lines = Object.keys(name$item).map((name) => {
         let item = name$item[name];
 
+        if (typeof item == 'function') {
+            return `    exports['${name}'] = ${item.toString()};`;
+        }
+
         //如 item = 'Mobile.Alert.show'; 
         //则解析为 item = { module: 'Mobile.Alert', method: 'show', };
         if (typeof item == 'string') {
@@ -56,7 +60,6 @@ module.exports = {
 
         content = $String.format(content, {
             '__global_exports_name__': globalExports.name,
-            // '__global_exports_modules__': JSON.stringify(Object.values(name$id).sort(), null, 4),
         });
 
         content = $String.replaceBetween(content, {

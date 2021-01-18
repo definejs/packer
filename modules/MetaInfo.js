@@ -1,6 +1,7 @@
 
 const IDRequires = require('./MetaInfo/IDRequires');
-const JSONFile = require('./MetaInfo/JSONFile');
+
+const File = require('@definejs/file');
 
 
 
@@ -11,17 +12,17 @@ module.exports = {
 
         //生成元数据，用于以后查阅和参考。
         ['id$info', 'name$id', 'name$requires',].forEach((key) => {
-            JSONFile.write(`${dir}${key}.json`, opt[key]);
+            File.writeSortJSON(`${dir}${key}.json`, opt[key]);
         });
 
         let ids = Object.keys(opt.id$info);
-        JSONFile.write(`${dir}ids.json`, ids);
+        File.writeSortJSON(`${dir}ids.json`, ids);
 
         //以下代码分析出来的依赖关系，仅仅是从包的粒度，太粗了。
         //需要从模板粒度进行分析，TODO...
         
         // let id$requires = IDRequires.get(opt);
-        // JSONFile.write(`${dir}id$requires.json`, id$requires);
+        // File.writeSortJSON(`${dir}id$requires.json`, id$requires);
 
 
         // let id$dependents = {};
@@ -37,7 +38,7 @@ module.exports = {
         //     });
         // });
 
-        // JSONFile.write(`${dir}id$dependents.json`, id$dependents);
+        // File.writeSortJSON(`${dir}id$dependents.json`, id$dependents);
 
 
 

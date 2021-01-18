@@ -27,7 +27,8 @@ function install(tempDir, dependencies, next) {
             loading.fail();
             return;
         }
-
+        
+        console.log(stdout);
         loading.succeed();
         next();
 

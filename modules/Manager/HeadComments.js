@@ -1,6 +1,7 @@
 
 const $String = require('@definejs/string');
 const $Date = require('@definejs/date')
+const $Object = require('@definejs/object');
 const Lines = require('@definejs/lines');
 
 function sortJSON(data) {
@@ -21,15 +22,20 @@ module.exports = {
     render(content, name$id) {
 
         let now = $Date.format(new Date(), 'yyyy-MM-dd HH:mm:ss');
+        let id$name = {};
 
-        let json = sortJSON(name$id);
-        json = JSON.stringify(json, null, 4);
-        json = Lines.pad(json, '* ', 1);
+        $Object.each(name$id, (name, id) => {
+            id$name[id] = name;
+        });
+
+        id$name = $Object.sort(id$name);
+        id$name = JSON.stringify(id$name, null, 4);
+        id$name = Lines.pad(id$name, '* ', 1);
 
 
         content = $String.format(content, {
             '__build-time__': now,
-            '__name$id__': json,
+            '__id$name__': id$name,
             '__packages-count__': Object.keys(name$id).length,
         });
 

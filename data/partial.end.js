@@ -9,7 +9,18 @@ BaseMM.each(function (id) {
 //导出的全局对象。
 //以下代码由 `@definejs/packer` 工具处理生成。
 global['{__global_exports_name__}'] = (function ({ require, bind, }) {
-    let exports = { require, };
+    let exports = {
+        require,
+        /**
+        * 加载 definejs 内部的公共模块，并创建它的一个实例。
+        * @param {string} id 模块的名称(id)。
+        * @return {Object} 返回该模块所创建的实例。
+        */
+        create(id, ...args) {
+            let M = require(id);
+            return new M(...args);
+        },
+    };
 
     //<!--global.exports.bind.begin-->
     exports['{name}'] = bind('{module}', '{method}');
