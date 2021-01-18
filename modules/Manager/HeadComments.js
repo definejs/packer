@@ -12,21 +12,22 @@ function sortJSON(data) {
     let json = {};
 
     Object.keys(data).sort().forEach((key) => {
-        json[key] = data[key]; 
+        json[key] = data[key];
     });
 
     return json;
 }
 
 module.exports = {
-    render(content, name$pkg) {
-
+    render(content, { name$id, name$pkg, }) {
         let now = $Date.format(new Date(), 'yyyy-MM-dd HH:mm:ss');
-
         let pid$mid = {};
 
         $Object.each(name$pkg, function (name, pkg) {
-            pid$mid[pkg.id] = name;
+            let pid = pkg.id;
+            let mid = name$id[name];
+
+            pid$mid[pid] = mid;
         });
 
         pid$mid = $Object.sort(pid$mid);
@@ -37,7 +38,7 @@ module.exports = {
         content = $String.format(content, {
             '__build-time__': now,
             '__pid$mid__': pid$mid,
-            '__packages-count__': Object.keys(name$id).length,
+            '__packages-count__': Object.keys(pid$mid).length,
         });
 
         return content;

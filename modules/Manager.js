@@ -163,7 +163,7 @@ module.exports = exports = {
 
         let content = [...begins, ...bodys, ...ends,].join('\r\n');
 
-        content = HeadComments.render(content, name$pkg);
+        content = HeadComments.render(content, { name$id, name$pkg, });
         content = GlobalExports.render(content, globalExports, name$id);
 
         
