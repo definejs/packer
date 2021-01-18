@@ -4,7 +4,7 @@
 * build time: {__build-time__}
 * build tool: @definejs/packer
 * source packages ({__packages-count__}):
-{__id$name__}
+{__pid$mid__}
 */
 ; (function (
     global,

@@ -35,6 +35,7 @@ class Package {
         let meta = {
             'alias': alias,         //包的短名称，如 `dialog`。
             'name': name,           //包的完整名称，如 `@definejs/dialog`。
+            'id': '',               //包的 id，如 `@definejs/dialog@1.0.0`。
             'version': '',          //版本号。
             'dir': dir,             //包所在的主目录，如 `temp/node_modules/@definejs/dialog/`。
             'pkg': {},              //包的 `package.json` 文件对应的 JSON 数据。
@@ -51,6 +52,8 @@ class Package {
         Object.assign(this, {
             'alias': meta.alias,
             'name': meta.name,
+            'version': meta.version,
+            'id': meta.id,
         });
 
     }
@@ -81,7 +84,7 @@ class Package {
                 package: {
                     'alias': meta.alias,
                     'name': meta.name,
-                    'version': meta.version,
+                    'version': pkg.version,
                 },
             });
 
@@ -103,13 +106,14 @@ class Package {
                 package: {
                     'alias': meta.alias,
                     'name': meta.name,
-                    'version': meta.version,
+                    'version': pkg.version,
                 },
             };
         });
         
         meta.pkg = pkg;
-        meta.version = pkg.version;
+        meta.id =  this.id = `${meta.name}@${pkg.version}`; //如`@definejs/dialog@1.0.0`。
+        meta.version = this.version = pkg.version;
         meta.main = path.join(meta.dir, pkg.main);
 
         let dependencies = pkg.dependencies || {};

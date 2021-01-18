@@ -19,23 +19,24 @@ function sortJSON(data) {
 }
 
 module.exports = {
-    render(content, name$id) {
+    render(content, name$pkg) {
 
         let now = $Date.format(new Date(), 'yyyy-MM-dd HH:mm:ss');
-        let id$name = {};
 
-        $Object.each(name$id, (name, id) => {
-            id$name[id] = name;
+        let pid$mid = {};
+
+        $Object.each(name$pkg, function (name, pkg) {
+            pid$mid[pkg.id] = name;
         });
 
-        id$name = $Object.sort(id$name);
-        id$name = JSON.stringify(id$name, null, 4);
-        id$name = Lines.pad(id$name, '* ', 1);
+        pid$mid = $Object.sort(pid$mid);
+        pid$mid = JSON.stringify(pid$mid, null, 4);
+        pid$mid = Lines.pad(pid$mid, '* ', 1);
 
 
         content = $String.format(content, {
             '__build-time__': now,
-            '__id$name__': id$name,
+            '__pid$mid__': pid$mid,
             '__packages-count__': Object.keys(name$id).length,
         });
 
