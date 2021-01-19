@@ -4,19 +4,6 @@ const $Date = require('@definejs/date')
 const $Object = require('@definejs/object');
 const Lines = require('@definejs/lines');
 
-function sortJSON(data) {
-    if (Array.isArray(data)) {
-        return data.sort();
-    }
-
-    let json = {};
-
-    Object.keys(data).sort().forEach((key) => {
-        json[key] = data[key];
-    });
-
-    return json;
-}
 
 module.exports = {
     render(content, { name$id, name$pkg, }) {
@@ -30,6 +17,8 @@ module.exports = {
             pid$mid[pid] = mid;
         });
 
+        let count = Object.keys(pid$mid).length;
+
         pid$mid = $Object.sort(pid$mid);
         pid$mid = JSON.stringify(pid$mid, null, 4);
         pid$mid = Lines.pad(pid$mid, '* ', 1);
@@ -38,7 +27,7 @@ module.exports = {
         content = $String.format(content, {
             '__build-time__': now,
             '__pid$mid__': pid$mid,
-            '__packages-count__': Object.keys(pid$mid).length,
+            '__packages-count__': count,
         });
 
         return content;
