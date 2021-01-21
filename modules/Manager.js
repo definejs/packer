@@ -1,6 +1,4 @@
 
-
-const $String = require('@definejs/string');
 const $Object = require('@definejs/object');
 const File = require('@definejs/file');
 
@@ -133,7 +131,7 @@ module.exports = exports = {
     * 合并 js 文件，作替换或注入一些特定的内容。
     * @param {Object} opt 必先配置项。
     *   opt = {
-    *       mmId: 'ModuleManager',
+    *       moduleManager: 'ModuleManager',
     *       begins: [],
     *       ends: [],
     *       dest: '',
@@ -164,7 +162,7 @@ module.exports = exports = {
         let content = [...begins, ...bodys, ...ends,].join('\r\n');
 
         content = HeadComments.render(content, { name$id, name$pkg, });
-        content = GlobalExports.render(content, globalExports, name$id);
+        content = GlobalExports.render(content, { name$id, globalExports, });
 
         
         if (dest) {

@@ -13,7 +13,7 @@ const InnerMM = (function ({ require, }) {
 
         //内部使用的模块管理器。
         mm = new ModuleManager({
-            cross: true,       //内部的，要允许跨级加载模块。 用于在一步到位加载某个模块的默念配置，如 `SSH/Server.defaults`
+            cross: true,       //内部的，要允许跨级加载模块。 用于一步到位加载某个模块的默念配置，如 `SSH/Server.defaults`
         });
 
         return mm;

@@ -11,7 +11,15 @@ const MetaInfo = require('./modules/MetaInfo');
 
 //打包指定的 package，生成最终的文件和一堆元数据。
 function render(config, dependencies) {
-    const { tempDir, outputDir, copyDir, scope, globalExports, moduleManager, thirds, } = config;
+    const {
+        tempDir,
+        outputDir,
+        copyDir,
+        scope,
+        globalExports,
+        moduleManager,
+        thirds,
+    } = config;
 
     const dataDir = path.join(__dirname, './data/');
     const homeDir = `${outputDir}definejs/`;
@@ -64,7 +72,6 @@ function render(config, dependencies) {
             `${dataDir}partial.begin.js`,
             `${dataDir}BaseMM.js`,
             `${dataDir}InnerMM.js`,
-
         ],
         ends: [
             ...thirdFiles,
