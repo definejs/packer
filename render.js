@@ -56,8 +56,6 @@ function render(config, dependencies) {
         'node_modules': node_modules,
     });
 
-
-
     let thirdFiles = Third.wrapDefine({
         sample: `${dataDir}third.define.sample.js`,
         dest: `${srcDir}{id}.js`,
@@ -75,6 +73,9 @@ function render(config, dependencies) {
         ],
         ends: [
             ...thirdFiles,
+
+            `${dataDir}BaseMM.each.js`,
+            `${dataDir}GlobalExports.js`,
             `${dataDir}partial.end.js`,
         ],
         dest: `${distDir}definejs.debug.js`,
