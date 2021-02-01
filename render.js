@@ -110,6 +110,9 @@ function render(config, dependencies) {
         'id$info': Manager.id$info,
         'name$id': Manager.name$id,
         'name$requires': Manager.name$requires,
+        'name$pkg': Manager.name$pkg,
+        'third$version': Manager.third$version,
+        
         'thirds': thirds,
         'dir': metaDir,
     });
