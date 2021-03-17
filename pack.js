@@ -19,7 +19,7 @@ function pack(config, done) {
 
     let doRender = () => {
         render(config, dependencies);
-        done && done(); //执行回调。
+        done && done(config, dependencies); //执行回调。
     };
 
     //指定要通过 npm 安装。

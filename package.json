@@ -1,6 +1,6 @@
 {
   "name": "@definejs/packer",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "pack definejs modules as a single file for browser.",
   "main": "index.js",
   "bin": {},
