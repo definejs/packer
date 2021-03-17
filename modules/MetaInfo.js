@@ -9,26 +9,35 @@ const IDRequires = require('./MetaInfo/IDRequires');
 module.exports = {
 
     render(opt) {
-        let { dir, id$info, name$pkg, third$version, } = opt;
-
-        //生成元数据，用于以后查阅和参考。
-        ['id$info', 'name$id', 'name$requires',].forEach((key) => {
-            File.writeSortJSON(`${dir}${key}.json`, opt[key]);
-        });
-
+        let { dir, id$info, name$pkg, name$id, name$requires, third$version, } = opt;
         
+        let ids = Object.keys(id$info);
+
         let name$version = $Object.map(name$pkg, (name, pkg) => {
             return pkg.version; 
         });
 
         Object.assign(name$version, third$version);
 
-        File.writeSortJSON(`${dir}name$version.json`, name$version);
+
+        //最终要返回的元数据。
+        let info = {
+            id$info,
+            ids,
+            name$id,
+            name$requires,
+            name$version,
+        };
 
 
-
-        let ids = Object.keys(id$info);
-        File.writeSortJSON(`${dir}ids.json`, ids);
+        //生成元数据，用于以后查阅和参考。
+        if (dir) {
+            $Object.each(info, (key, value) => {
+                File.writeSortJSON(`${dir}${key}.json`, value);
+            });
+        }
+        
+        return info;
 
         //以下代码分析出来的依赖关系，仅仅是从包的粒度，太粗了。
         //需要从模板粒度进行分析，TODO...
@@ -54,6 +63,7 @@ module.exports = {
 
 
 
+        
 
     },
 };

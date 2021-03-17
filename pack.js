@@ -18,8 +18,8 @@ function pack(config, done) {
     let dependencies = parse(config);
 
     let doRender = () => {
-        render(config, dependencies);
-        done && done(config, dependencies); //执行回调。
+        let metaInfo = render(config, dependencies);
+        done && done(config, metaInfo); //执行回调。
     };
 
     //指定要通过 npm 安装。

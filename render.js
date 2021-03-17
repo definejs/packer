@@ -106,7 +106,7 @@ function render(config, dependencies) {
 
 
     //生成元数据，以便查阅和参考。
-    MetaInfo.render({
+    let metaInfo = MetaInfo.render({
         'id$info': Manager.id$info,
         'name$id': Manager.name$id,
         'name$requires': Manager.name$requires,
@@ -114,10 +114,9 @@ function render(config, dependencies) {
         'third$version': Manager.third$version,
         
         'thirds': thirds,
+        
         'dir': metaDir,
     });
-
-
 
 
     if (copyDir) {
@@ -131,6 +130,7 @@ function render(config, dependencies) {
         });
     }
 
+    return metaInfo;
 
 }
 
