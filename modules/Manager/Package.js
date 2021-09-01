@@ -1,5 +1,6 @@
 
 const path = require('path');
+const Path = require('@definejs/path');
 const $Object = require('@definejs/object');
 const $String = require('@definejs/string');
 const Fn = require('@definejs/fn');
@@ -29,7 +30,7 @@ class Package {
         let { scope, dir, } = config;
         let { alias, name, } = Name.parse(pname, scope);
 
-        dir = path.join(dir, name) + '/';   
+        dir = Path.join(dir, name) + '/';   
 
 
         let meta = {
@@ -114,7 +115,7 @@ class Package {
         meta.pkg = pkg;
         meta.id =  this.id = `${meta.name}@${pkg.version}`; //如`@definejs/dialog@1.0.0`。
         meta.version = this.version = pkg.version;
-        meta.main = path.join(meta.dir, pkg.main);
+        meta.main = Path.join(meta.dir, pkg.main);
 
         let dependencies = pkg.dependencies || {};
 
@@ -153,7 +154,7 @@ class Package {
             file = file + '.js';
         }
 
-        file = path.join(meta.dir, file);
+        file = Path.join(meta.dir, file);
         id = meta.file$id[file];
 
         if (id) {
@@ -192,8 +193,8 @@ class Package {
                     'name$id': name$id, //全局的包和对应的模块 id，如 { '@definejs/dialog': 'Dialog', }
                 });
 
-                let filename = path.relative(meta.dir, file); //如 `modules/Dialog/Template.js`。
-                filename = path.join(meta.name, filename); //如 `@definejs/dialog/modules/Dialog/Template.js`
+                let filename = Path.relative(meta.dir, file); //如 `modules/Dialog/Template.js`。
+                filename = Path.join(meta.name, filename); //如 `@definejs/dialog/modules/Dialog/Template.js`
 
                 content = Module.wrapDefine(sample, lines, {
                     'id': info.id,

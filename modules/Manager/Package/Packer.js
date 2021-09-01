@@ -1,5 +1,6 @@
 
-const path = require('path');
+
+const Path = require('@definejs/path');
 const $Object = require('@definejs/object');
 const File = require('@definejs/file');
 const Fn = require('@definejs/fn');
@@ -36,7 +37,7 @@ function normalize(dir, packer = {}) {
     let fullfile$id = {}; //用完整的路径。
 
     $Object.each(file$id, (file, id) => {
-        file = path.join(dir, file);
+        file = Path.join(dir, file);
         fullfile$id[file] = id;
     })
 
@@ -53,8 +54,7 @@ module.exports = {
 
 
     get(dir) { 
-        let file = path.join(dir, 'packer.js');
-
+        let file = Path.join(dir, 'packer.js');
         let packer = read(file);
 
         packer = normalize(dir, packer);

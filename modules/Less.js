@@ -1,5 +1,5 @@
 
-const path = require('path');
+
 const $String = require('@definejs/string');
 const File = require('@definejs/file');
 const Patterns = require('@definejs/patterns');

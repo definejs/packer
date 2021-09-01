@@ -1,5 +1,5 @@
 
-const path = require('path');
+const Path = require('@definejs/path');
 const File = require('@definejs/file');
 
 module.exports = {
@@ -14,7 +14,7 @@ module.exports = {
             return false;
         }
 
-        main = path.join(home, main);
+        main = Path.join(home, main);
 
         return File.read(main);
     },

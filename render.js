@@ -1,5 +1,5 @@
 
-const path = require('path');
+const Path = require('@definejs/path');
 const Directory = require('@definejs/directory');
 
 const Less = require('./modules/Less');
@@ -21,7 +21,7 @@ function render(config, dependencies) {
         thirds,
     } = config;
 
-    const dataDir = path.join(__dirname, './data/');
+    const dataDir = Path.join(__dirname, './data/');
     const homeDir = `${outputDir}definejs/`;
     const distDir = `${homeDir}dist/`;
     const metaDir = `${homeDir}meta/`;

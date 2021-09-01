@@ -1,6 +1,6 @@
 {
   "name": "@definejs/packer",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "pack definejs modules as a single file for browser.",
   "main": "index.js",
   "bin": {},
@@ -18,6 +18,7 @@
     "@definejs/hint-line": "^1.0.0",
     "@definejs/lines": "^1.0.0",
     "@definejs/object": "^1.1.0",
+    "@definejs/path": "^2.0.1",
     "@definejs/patterns": "^1.0.2",
     "@definejs/string": "^1.0.0",
     "@definejs/tasker": "^1.0.2",
