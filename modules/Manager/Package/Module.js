@@ -1,8 +1,6 @@
 
 const path = require('path');
-const $Object = require('@definejs/object');
 const $String = require('@definejs/string');
-const File = require('@definejs/file');
 const Lines = require('@definejs/lines');
 
 const Require = require('./Module/Require');
