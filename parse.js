@@ -24,8 +24,9 @@ function parse (config) {
         dependencies = packages;
     }
     else {
-        let pkg = packages === true ? `${tempDir}package.json` :
-            typeof packages == 'string' ? pkg : null;
+        let pkg =
+            packages === true ? `${tempDir}package.json` : 
+            typeof packages == 'string' ? packages : null;
 
         if (pkg) {
             pkg = File.readJSON(pkg);
