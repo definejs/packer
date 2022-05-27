@@ -10,11 +10,12 @@ const render = require('./render');
 * @param {function} done 可选，回调函数。
 */
 function pack(config, done) {
+
     //这些是必备的，直接写死。
     config.scope = '@definejs/';                //域名。
     config.moduleManager = 'module-manager';    //模块管理器对应的包名。
 
-    let { tempDir, } = config;
+    let { tempDir, outputDir, } = config;
     let dependencies = parse(config);
 
     let doRender = () => {
@@ -24,7 +25,7 @@ function pack(config, done) {
 
     //指定要通过 npm 安装。
     if (config.install) {
-        install(tempDir, dependencies, doRender);
+        install({ tempDir, outputDir, }, doRender);
     }
     else {
         doRender();

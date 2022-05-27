@@ -6,15 +6,14 @@ const ora = require('ora');
 
 
 //使用 `npm insall` 命令安装相应的包。
-function install(tempDir, dependencies, next) {
+function install({ tempDir, outputDir, }, next) {
     const loading = ora("downloading...");
-    const pkg = require('./data/package.sample.json');
-
-    pkg.dependencies = dependencies;
 
 
-    Directory.clear(tempDir);   //先清空。
-    File.writeJSON(`${tempDir}package.json`, pkg);
+    //先清理。
+    Directory.clear(`${tempDir}node_modules/`);
+    File.delete(`${tempDir}package-lock.json`);
+    Directory.clear(outputDir);
 
 
     console.log('npm install'.green, `${tempDir}package.json`.cyan);
@@ -27,9 +26,10 @@ function install(tempDir, dependencies, next) {
             loading.fail();
             return;
         }
-        
+
         console.log(stdout);
         loading.succeed();
+        
         next();
 
     });
